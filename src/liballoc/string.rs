@@ -1923,6 +1923,34 @@ impl<'a> Add<&'a str> for String {
     }
 }
 
+/// Implements the `+` operator for concatenating a string and a single character.
+///
+/// This has the same behavior as the [`String::push`] method.
+///
+/// This consumes the `String` on the left-hand side and re-uses its buffer (growing it if
+/// necessary). This is done to avoid allocating a new `String` and copying the entire contents on
+/// every operation, which would lead to `O(n^2)` running time when building an `n`-byte string by
+/// repeated concatenation.
+///
+/// # Examples
+///
+/// ```
+/// let a = String::from("I ♥ ");
+/// let b = a + '🦀';
+/// // `a` is moved and can no longer be used here.
+/// assert_eq(b, "I ♥ 🦀");
+/// ```
+#[unstable(feature = "string_plus_char", reason = "new API", issue="0")]
+impl Add<char> for String {
+    type Output = String;
+
+    #[inline]
+    fn add(mut self, c: char) -> String {
+        self.push(c);
+        self
+    }
+}
+
 /// Implements the `+=` operator for appending to a `String`.
 ///
 /// This has the same behavior as the [`push_str`] method.
@@ -1933,6 +1961,17 @@ impl<'a> AddAssign<&'a str> for String {
     #[inline]
     fn add_assign(&mut self, other: &str) {
         self.push_str(other);
+    }
+}
+
+/// Implements the `+=` operator for appending a single character to a `String`.
+///
+/// This has the same behavior as the [`String::push`] method.
+#[unstable(feature = "string_plus_char", reason = "new API", issue="0")]
+impl AddAssign<char> for String {
+    #[inline]
+    fn add_assign(&mut self, c: char) {
+        self.push(c);
     }
 }
 
