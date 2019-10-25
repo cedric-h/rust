@@ -6,12 +6,6 @@ fn main() {
     let big = [0u8; 33];
 
     // Expressions that should trigger the lint
-    small.into_iter();
-    //~^ WARNING this method call currently resolves to `<&[T; N] as IntoIterator>::into_iter`
-    //~| WARNING this was previously accepted by the compiler but is being phased out
-    [1, 2].into_iter();
-    //~^ WARNING this method call currently resolves to `<&[T; N] as IntoIterator>::into_iter`
-    //~| WARNING this was previously accepted by the compiler but is being phased out
     big.into_iter();
     //~^ WARNING this method call currently resolves to `<&[T] as IntoIterator>::into_iter`
     //~| WARNING this was previously accepted by the compiler but is being phased out
@@ -21,6 +15,8 @@ fn main() {
 
 
     // Expressions that should not
+    small.into_iter();
+    [1, 2].into_iter();
     (&[1, 2]).into_iter();
     (&small).into_iter();
     (&[0u8; 33]).into_iter();

@@ -46,6 +46,7 @@ LL |     for _ in &[0_usize; 33] {
              <&'a [T] as std::iter::IntoIterator>
              <&'a mut [T; _] as std::iter::IntoIterator>
              <&'a mut [T] as std::iter::IntoIterator>
+             <[T; _] as std::iter::IntoIterator>
    = note: required by `std::iter::IntoIterator::into_iter`
 
 error: aborting due to 5 previous errors

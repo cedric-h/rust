@@ -464,7 +464,7 @@ mod prim_pointer { }
 /// the element type allows it:
 ///
 /// - [`Debug`][debug]
-/// - [`IntoIterator`][intoiterator] (implemented for `&[T; N]` and `&mut [T; N]`)
+/// - [`IntoIterator`][intoiterator] (implemented for `[T; N]`, `&[T; N]` and `&mut [T; N]`)
 /// - [`PartialEq`][partialeq], [`PartialOrd`][partialord], [`Eq`][eq], [`Ord`][ord]
 /// - [`Hash`][hash]
 /// - [`AsRef`][asref], [`AsMut`][asmut]
@@ -500,32 +500,16 @@ mod prim_pointer { }
 /// assert_eq!([1, 2], &array[1..]);
 ///
 /// // This loop prints: 0 1 2
-/// for x in &array {
+/// for x in array {
 ///     print!("{} ", x);
 /// }
 /// ```
 ///
-/// An array itself is not iterable:
+/// You can also iterate over reference to the array's elements:
 ///
-/// ```compile_fail,E0277
+/// ```
 /// let array: [i32; 3] = [0; 3];
 ///
-/// for x in array { }
-/// // error: the trait bound `[i32; 3]: std::iter::Iterator` is not satisfied
-/// ```
-///
-/// The solution is to coerce the array to a slice by calling a slice method:
-///
-/// ```
-/// # let array: [i32; 3] = [0; 3];
-/// for x in array.iter() { }
-/// ```
-///
-/// If the array has 32 or fewer elements (see above), you can also use the
-/// array reference's [`IntoIterator`] implementation:
-///
-/// ```
-/// # let array: [i32; 3] = [0; 3];
 /// for x in &array { }
 /// ```
 ///
