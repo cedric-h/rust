@@ -200,6 +200,20 @@ where
     }
 }
 
+#[cfg(not(bootstrap))]
+#[stable(feature = "array_into_iter_impl", since = "1.41.0")]
+impl<T, const N: usize> IntoIterator for [T; N]
+where
+    [T; N]: LengthAtMost32,
+{
+    type Item = T;
+    type IntoIter = IntoIter<T, {N}>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        IntoIter::new(self)
+    }
+}
+
 #[stable(feature = "rust1", since = "1.0.0")]
 impl<'a, T, const N: usize> IntoIterator for &'a [T; N]
 where
