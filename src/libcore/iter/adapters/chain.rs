@@ -283,6 +283,36 @@ impl<A, B> FusedIterator for Chain<A, B>
           B: FusedIterator<Item=A::Item>,
 {}
 
+#[stable(feature = "chain_exact_size", since = "1.41.0")]
+impl<A, B> ExactSizeIterator for Chain<A, B>
+where
+    A: ExactSizeIterator,
+    B: ExactSizeIterator<Item = A::Item>,
+{
+    /// Returns the exact number of times the iterator will iterate.
+    ///
+    /// # Overflow Behavior
+    ///
+    /// The method does no guarding against overflows, so calling `len` on an
+    /// iterator with more than [`usize::MAX`] elements either produces the
+    /// wrong result or panics. If debug assertions are enabled, a panic is
+    /// guaranteed.
+    ///
+    /// # Panics
+    ///
+    /// This function might panic if the iterator has more than [`usize::MAX`]
+    /// elements.
+    ///
+    /// [`usize::MAX`]: ../../std/usize/constant.MAX.html
+    fn len(&self) -> usize {
+        match self.state {
+            ChainState::Both => self.a.len() + self.b.len(),
+            ChainState::Front => self.a.len(),
+            ChainState::Back => self.b.len(),
+        }
+    }
+}
+
 #[unstable(feature = "trusted_len", issue = "37572")]
 unsafe impl<A, B> TrustedLen for Chain<A, B>
     where A: TrustedLen, B: TrustedLen<Item=A::Item>,
