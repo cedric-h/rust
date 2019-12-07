@@ -193,7 +193,7 @@ use crate::sys;
 /// use std::collections::HashMap;
 ///
 /// let timber_resources: HashMap<&str, i32> = [("Norway", 100), ("Denmark", 50), ("Iceland", 10)]
-///     .iter().cloned().collect();
+///     .into_iter().collect();
 /// // use the values stored in map
 /// ```
 
@@ -3199,7 +3199,7 @@ mod test_map {
     fn test_size_hint() {
         let xs = [(1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6)];
 
-        let map: HashMap<_, _> = xs.iter().cloned().collect();
+        let map: HashMap<_, _> = xs.into_iter().collect();
 
         let mut iter = map.iter();
 
@@ -3212,7 +3212,7 @@ mod test_map {
     fn test_iter_len() {
         let xs = [(1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6)];
 
-        let map: HashMap<_, _> = xs.iter().cloned().collect();
+        let map: HashMap<_, _> = xs.into_iter().collect();
 
         let mut iter = map.iter();
 
@@ -3225,7 +3225,7 @@ mod test_map {
     fn test_mut_size_hint() {
         let xs = [(1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6)];
 
-        let mut map: HashMap<_, _> = xs.iter().cloned().collect();
+        let mut map: HashMap<_, _> = xs.into_iter().collect();
 
         let mut iter = map.iter_mut();
 
@@ -3238,7 +3238,7 @@ mod test_map {
     fn test_iter_mut_len() {
         let xs = [(1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6)];
 
-        let mut map: HashMap<_, _> = xs.iter().cloned().collect();
+        let mut map: HashMap<_, _> = xs.into_iter().collect();
 
         let mut iter = map.iter_mut();
 
@@ -3274,7 +3274,7 @@ mod test_map {
     fn test_entry() {
         let xs = [(1, 10), (2, 20), (3, 30), (4, 40), (5, 50), (6, 60)];
 
-        let mut map: HashMap<_, _> = xs.iter().cloned().collect();
+        let mut map: HashMap<_, _> = xs.into_iter().collect();
 
         // Existing key (insert)
         match map.entry(1) {
@@ -3463,7 +3463,7 @@ mod test_map {
 
         let xs = [(1i32, 10i32), (2, 20), (3, 30), (4, 40), (5, 50), (6, 60)];
 
-        let mut map: HashMap<_, _> = xs.iter().cloned().collect();
+        let mut map: HashMap<_, _> = xs.into_iter().collect();
 
         let compute_hash = |map: &HashMap<i32, i32>, k: i32| -> u64 {
             use core::hash::{BuildHasher, Hash, Hasher};

@@ -94,7 +94,7 @@ use super::map::{self, HashMap, Keys, RandomState};
 /// use std::collections::HashSet;
 ///
 /// let viking_names: HashSet<&'static str> =
-///     [ "Einar", "Olaf", "Harald" ].iter().cloned().collect();
+///     [ "Einar", "Olaf", "Harald" ].into_iter().collect();
 /// // use the values stored in the set
 /// ```
 ///
@@ -228,7 +228,7 @@ impl<T, S> HashSet<T, S> {
     /// ```
     /// use std::collections::HashSet;
     ///
-    /// let mut set: HashSet<_> = [1, 2, 3].iter().cloned().collect();
+    /// let mut set: HashSet<_> = [1, 2, 3].into_iter().collect();
     /// assert!(!set.is_empty());
     ///
     /// // print 1, 2, 3 in an arbitrary order
@@ -442,8 +442,8 @@ impl<T, S> HashSet<T, S>
     ///
     /// ```
     /// use std::collections::HashSet;
-    /// let a: HashSet<_> = [1, 2, 3].iter().cloned().collect();
-    /// let b: HashSet<_> = [4, 2, 3, 4].iter().cloned().collect();
+    /// let a: HashSet<_> = [1, 2, 3].into_iter().collect();
+    /// let b: HashSet<_> = [4, 2, 3, 4].into_iter().collect();
     ///
     /// // Can be seen as `a - b`.
     /// for x in a.difference(&b) {
@@ -474,8 +474,8 @@ impl<T, S> HashSet<T, S>
     ///
     /// ```
     /// use std::collections::HashSet;
-    /// let a: HashSet<_> = [1, 2, 3].iter().cloned().collect();
-    /// let b: HashSet<_> = [4, 2, 3, 4].iter().cloned().collect();
+    /// let a: HashSet<_> = [1, 2, 3].into_iter().collect();
+    /// let b: HashSet<_> = [4, 2, 3, 4].into_iter().collect();
     ///
     /// // Print 1, 4 in arbitrary order.
     /// for x in a.symmetric_difference(&b) {
@@ -503,8 +503,8 @@ impl<T, S> HashSet<T, S>
     ///
     /// ```
     /// use std::collections::HashSet;
-    /// let a: HashSet<_> = [1, 2, 3].iter().cloned().collect();
-    /// let b: HashSet<_> = [4, 2, 3, 4].iter().cloned().collect();
+    /// let a: HashSet<_> = [1, 2, 3].into_iter().collect();
+    /// let b: HashSet<_> = [4, 2, 3, 4].into_iter().collect();
     ///
     /// // Print 2, 3 in arbitrary order.
     /// for x in a.intersection(&b) {
@@ -537,8 +537,8 @@ impl<T, S> HashSet<T, S>
     ///
     /// ```
     /// use std::collections::HashSet;
-    /// let a: HashSet<_> = [1, 2, 3].iter().cloned().collect();
-    /// let b: HashSet<_> = [4, 2, 3, 4].iter().cloned().collect();
+    /// let a: HashSet<_> = [1, 2, 3].into_iter().collect();
+    /// let b: HashSet<_> = [4, 2, 3, 4].into_iter().collect();
     ///
     /// // Print 1, 2, 3, 4 in arbitrary order.
     /// for x in a.union(&b) {
@@ -573,7 +573,7 @@ impl<T, S> HashSet<T, S>
     /// ```
     /// use std::collections::HashSet;
     ///
-    /// let set: HashSet<_> = [1, 2, 3].iter().cloned().collect();
+    /// let set: HashSet<_> = [1, 2, 3].into_iter().collect();
     /// assert_eq!(set.contains(&1), true);
     /// assert_eq!(set.contains(&4), false);
     /// ```
@@ -600,7 +600,7 @@ impl<T, S> HashSet<T, S>
     /// ```
     /// use std::collections::HashSet;
     ///
-    /// let set: HashSet<_> = [1, 2, 3].iter().cloned().collect();
+    /// let set: HashSet<_> = [1, 2, 3].into_iter().collect();
     /// assert_eq!(set.get(&2), Some(&2));
     /// assert_eq!(set.get(&4), None);
     /// ```
@@ -626,7 +626,7 @@ impl<T, S> HashSet<T, S>
     ///
     /// use std::collections::HashSet;
     ///
-    /// let mut set: HashSet<_> = [1, 2, 3].iter().cloned().collect();
+    /// let mut set: HashSet<_> = [1, 2, 3].into_iter().collect();
     /// assert_eq!(set.len(), 3);
     /// assert_eq!(set.get_or_insert(2), &2);
     /// assert_eq!(set.get_or_insert(100), &100);
@@ -680,7 +680,7 @@ impl<T, S> HashSet<T, S>
     /// ```
     /// use std::collections::HashSet;
     ///
-    /// let a: HashSet<_> = [1, 2, 3].iter().cloned().collect();
+    /// let a: HashSet<_> = [1, 2, 3].into_iter().collect();
     /// let mut b = HashSet::new();
     ///
     /// assert_eq!(a.is_disjoint(&b), true);
@@ -706,7 +706,7 @@ impl<T, S> HashSet<T, S>
     /// ```
     /// use std::collections::HashSet;
     ///
-    /// let sup: HashSet<_> = [1, 2, 3].iter().cloned().collect();
+    /// let sup: HashSet<_> = [1, 2, 3].into_iter().collect();
     /// let mut set = HashSet::new();
     ///
     /// assert_eq!(set.is_subset(&sup), true);
@@ -732,7 +732,7 @@ impl<T, S> HashSet<T, S>
     /// ```
     /// use std::collections::HashSet;
     ///
-    /// let sub: HashSet<_> = [1, 2].iter().cloned().collect();
+    /// let sub: HashSet<_> = [1, 2].into_iter().collect();
     /// let mut set = HashSet::new();
     ///
     /// assert_eq!(set.is_superset(&sub), false);
@@ -841,7 +841,7 @@ impl<T, S> HashSet<T, S>
     /// ```
     /// use std::collections::HashSet;
     ///
-    /// let mut set: HashSet<_> = [1, 2, 3].iter().cloned().collect();
+    /// let mut set: HashSet<_> = [1, 2, 3].into_iter().collect();
     /// assert_eq!(set.take(&2), Some(2));
     /// assert_eq!(set.take(&2), None);
     /// ```
@@ -867,7 +867,7 @@ impl<T, S> HashSet<T, S>
     /// use std::collections::HashSet;
     ///
     /// let xs = [1,2,3,4,5,6];
-    /// let mut set: HashSet<i32> = xs.iter().cloned().collect();
+    /// let mut set: HashSet<i32> = xs.into_iter().collect();
     /// set.retain(|&k| k % 2 == 0);
     /// assert_eq!(set.len(), 3);
     /// ```
@@ -1944,7 +1944,7 @@ mod test_set {
     #[test]
     fn test_retain() {
         let xs = [1, 2, 3, 4, 5, 6];
-        let mut set: HashSet<i32> = xs.iter().cloned().collect();
+        let mut set: HashSet<i32> = xs.into_iter().collect();
         set.retain(|&k| k % 2 == 0);
         assert_eq!(set.len(), 3);
         assert!(set.contains(&2));
